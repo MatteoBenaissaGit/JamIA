@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8534580133512996289}
   m_Layer: 0
-  m_Name: Round_Plane
+  m_Name: Texture_Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
