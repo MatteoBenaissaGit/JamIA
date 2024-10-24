@@ -28,7 +28,7 @@ namespace Inputs
             _inputScheme = new InputScheme();
             _inputScheme.Enable();
             
-            _inputScheme.Map.ClickLeftButton.performed += OnClick;
+            _inputScheme.Map.ClickLeftButton.started += OnClick;
         }
 
         private void OnClick(InputAction.CallbackContext context)

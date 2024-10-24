@@ -39,7 +39,7 @@ namespace Editor
             {
                 for (int x = 0; x < _size.x; x++)
                 {
-                    BlockController block = Instantiate(_blockControllerPrefab, _blockManager.transform);
+                    BlockController block = (BlockController)PrefabUtility.InstantiatePrefab(_blockControllerPrefab, _blockManager.transform);
                     block.transform.position = new Vector3(x, 0, y);
                     _blockManager.AddBlock(block);
                 }

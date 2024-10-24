@@ -29,6 +29,9 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float _firstBorderThickness;
     [SerializeField] private float _secondaryBorderThickness;
+    [SerializeField] private Vector2 _maxMovement;
+
+    private Vector2 _movementAmount;
 
     private void Start()
     {
@@ -86,8 +89,6 @@ public class CameraController : MonoBehaviour
 
         Vector2 movement = new Vector2(_edgeMovement.x * _edgeMovementSpeed, _edgeMovement.y * _edgeMovementSpeed);
         MoveCameraWithMovement(movement);
-
-        Debug.Log(movement);
     }
 
     private void MoveCameraWithMovement(Vector2 movement)
@@ -97,6 +98,19 @@ public class CameraController : MonoBehaviour
         float deltaTime = Time.deltaTime * Screen.dpi;
         Vector3 xMovement = Camera.transform.right * (-movement.x * _moveSpeed * zoomFactorSpeed * deltaTime);
         Vector3 yMovement = Camera.transform.up * (-movement.y * _moveSpeed * zoomFactorSpeed * deltaTime);
+        
+        _movementAmount += new Vector2(movement.x, movement.y);
+        if (_movementAmount.x > _maxMovement.x || _movementAmount.x < -_maxMovement.x)
+        {
+            xMovement = Vector3.zero;
+            _movementAmount -= new Vector2(movement.x, 0);
+        }
+        if (_movementAmount.y > _maxMovement.y || _movementAmount.y < -_maxMovement.y)
+        {
+            yMovement = Vector3.zero;
+            _movementAmount -= new Vector2(0, movement.y);
+        }
+        
         Camera.transform.localPosition += xMovement + yMovement;
     }
 
