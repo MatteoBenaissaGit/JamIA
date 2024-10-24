@@ -35,6 +35,33 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMoveButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""347bc104-2a40-4da9-aedc-76e53fe58125"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""14284f6e-b2c3-4920-b39f-2a51e70e61ca"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""af6e9659-f23a-4e58-821d-30e526885b1b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -48,6 +75,39 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
                     ""action"": ""ClickLeftButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc52c6ae-08de-4161-801b-1f8e7822c67e"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0186d623-2e53-464f-b186-9283908232be"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""baf3b25c-8853-4460-9384-123285405bca"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +117,9 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
         // Map
         m_Map = asset.FindActionMap("Map", throwIfNotFound: true);
         m_Map_ClickLeftButton = m_Map.FindAction("ClickLeftButton", throwIfNotFound: true);
+        m_Map_CameraMoveButton = m_Map.FindAction("CameraMoveButton", throwIfNotFound: true);
+        m_Map_CameraMovement = m_Map.FindAction("CameraMovement", throwIfNotFound: true);
+        m_Map_Scroll = m_Map.FindAction("Scroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,11 +182,17 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Map;
     private List<IMapActions> m_MapActionsCallbackInterfaces = new List<IMapActions>();
     private readonly InputAction m_Map_ClickLeftButton;
+    private readonly InputAction m_Map_CameraMoveButton;
+    private readonly InputAction m_Map_CameraMovement;
+    private readonly InputAction m_Map_Scroll;
     public struct MapActions
     {
         private @InputScheme m_Wrapper;
         public MapActions(@InputScheme wrapper) { m_Wrapper = wrapper; }
         public InputAction @ClickLeftButton => m_Wrapper.m_Map_ClickLeftButton;
+        public InputAction @CameraMoveButton => m_Wrapper.m_Map_CameraMoveButton;
+        public InputAction @CameraMovement => m_Wrapper.m_Map_CameraMovement;
+        public InputAction @Scroll => m_Wrapper.m_Map_Scroll;
         public InputActionMap Get() { return m_Wrapper.m_Map; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -136,6 +205,15 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
             @ClickLeftButton.started += instance.OnClickLeftButton;
             @ClickLeftButton.performed += instance.OnClickLeftButton;
             @ClickLeftButton.canceled += instance.OnClickLeftButton;
+            @CameraMoveButton.started += instance.OnCameraMoveButton;
+            @CameraMoveButton.performed += instance.OnCameraMoveButton;
+            @CameraMoveButton.canceled += instance.OnCameraMoveButton;
+            @CameraMovement.started += instance.OnCameraMovement;
+            @CameraMovement.performed += instance.OnCameraMovement;
+            @CameraMovement.canceled += instance.OnCameraMovement;
+            @Scroll.started += instance.OnScroll;
+            @Scroll.performed += instance.OnScroll;
+            @Scroll.canceled += instance.OnScroll;
         }
 
         private void UnregisterCallbacks(IMapActions instance)
@@ -143,6 +221,15 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
             @ClickLeftButton.started -= instance.OnClickLeftButton;
             @ClickLeftButton.performed -= instance.OnClickLeftButton;
             @ClickLeftButton.canceled -= instance.OnClickLeftButton;
+            @CameraMoveButton.started -= instance.OnCameraMoveButton;
+            @CameraMoveButton.performed -= instance.OnCameraMoveButton;
+            @CameraMoveButton.canceled -= instance.OnCameraMoveButton;
+            @CameraMovement.started -= instance.OnCameraMovement;
+            @CameraMovement.performed -= instance.OnCameraMovement;
+            @CameraMovement.canceled -= instance.OnCameraMovement;
+            @Scroll.started -= instance.OnScroll;
+            @Scroll.performed -= instance.OnScroll;
+            @Scroll.canceled -= instance.OnScroll;
         }
 
         public void RemoveCallbacks(IMapActions instance)
@@ -163,5 +250,8 @@ public partial class @InputScheme: IInputActionCollection2, IDisposable
     public interface IMapActions
     {
         void OnClickLeftButton(InputAction.CallbackContext context);
+        void OnCameraMoveButton(InputAction.CallbackContext context);
+        void OnCameraMovement(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
     }
 }

@@ -8,10 +8,23 @@ namespace Inputs
 {
     public class InputManager : MonoBehaviour
     {
+        public static InputManager Instance { get; private set; }
+
+        public InputScheme InputScheme => _inputScheme;
+
         private InputScheme _inputScheme;
 
         private void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+            
             _inputScheme = new InputScheme();
             _inputScheme.Enable();
             
