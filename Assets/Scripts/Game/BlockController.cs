@@ -14,6 +14,8 @@ namespace Game
         [SerializeField] private Renderer _renderer;
         [SerializeField] private ParticleSystem _seedPlantVFX;
         
+        public ParticleSystem SeedPlantVFX => _seedPlantVFX;
+        
         public bool IsIrrigated { get; private set; }
         public Seed Seed { get; private set; }
 
@@ -63,6 +65,7 @@ namespace Game
             var seedPrefab = GameManager.Instance.Seeds.GetData(currentSeedHeld).Prefab.GetComponent<Seed>();
             Seed = Instantiate(seedPrefab, transform);
             Seed.transform.position = transform.position + Vector3.up * 0.5f;
+            Seed.Initialize(this);
         }
         
 #if UNITY_EDITOR

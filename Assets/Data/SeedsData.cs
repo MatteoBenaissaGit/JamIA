@@ -12,6 +12,11 @@ namespace Data
         [field:SerializeField] public Sprite Icon { get; private set; }
         [field:SerializeField] public Texture2D Cursor { get; private set; }
         [field:SerializeField] public Seed Prefab { get; private set; }
+        [field: SerializeField] public int ExperienceGainedOnPlant { get; private set; } = 1;
+        [field: SerializeField] public int ExperienceGainedOnGrowth { get; private set; } = 2;
+        [field: SerializeField] public float TimeToBecomePlant { get; private set; } = 5;
+        [field: SerializeField] public float TimeToDropMoney { get; private set; } = 5;
+        [field: SerializeField] public int MoneyDropped { get; private set; } = 1;
     }
     
     [CreateAssetMenu(fileName = "SeedData", menuName = "ScriptableObjects/Seed", order = 1)]

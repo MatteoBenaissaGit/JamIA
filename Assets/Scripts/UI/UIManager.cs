@@ -1,5 +1,6 @@
 ﻿using System;
 using Game;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +11,24 @@ namespace UI
         [field:SerializeField] public InventoryBarController InventoryBar { get; private set; }
 
         [SerializeField] private Texture2D _baseCursor;
+        [SerializeField] private TMP_Text _moneyText;
 
         private void Awake()
         {
             SetBaseCursor();
         }
 
-        private void Start()
+        public void Initialize()
         {
             InventoryBar.CreateInventorySlot(SeedType.One, 4);
             InventoryBar.CreateInventorySlot(SeedType.Two, 0);
+            
+            SetMoney(GameManager.Instance.Money);
+        }
+
+        public void SetMoney(int amount)
+        {
+            _moneyText.text = amount.ToString();
         }
 
         private void SetCursor(Texture2D texture, Vector2 hotSpot)

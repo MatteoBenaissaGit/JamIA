@@ -15,6 +15,7 @@ namespace Game
         [field:SerializeField] public UIManager UI { get; private set; }
         
         public bool IsHoldingSeed { get; private set; }
+        public int Money { get; private set; }
 
         private SeedType _currentSeedHeld;
         private InventorySlotController _currentSeedHeldSlot;
@@ -29,6 +30,11 @@ namespace Game
             {
                 Destroy(this);
             }
+        }
+
+        private void Start()
+        {
+            UI.Initialize();
         }
 
         private void Update()
@@ -67,17 +73,24 @@ namespace Game
 
         public void DropSeedOnBlock(BlockController block)
         {
+            IsHoldingSeed = false;
+            
             UI.SetSeedOnMouse(false, SeedType.One);
             _currentPointedBlock?.FeedbackHoldingSeed(false);
 
             if (block == null || block.CanGetSeed() == false) 
             {
-                IsHoldingSeed = false;
                 return;
             }
             
             _currentSeedHeldSlot.SetAmount(-1);
             block.PlantSeed(_currentSeedHeld);
+        }
+
+        public void SetMoney(int amountToAdd)
+        {
+            Money += amountToAdd;
+            UI.SetMoney(Money);
         }
     }
 }
