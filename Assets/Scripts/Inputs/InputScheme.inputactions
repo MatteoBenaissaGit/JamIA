@@ -1,0 +1,34 @@
+{
+    "name": "InputScheme",
+    "maps": [
+        {
+            "name": "Map",
+            "id": "09844144-ed8f-4e06-9670-86da97994ffe",
+            "actions": [
+                {
+                    "name": "ClickLeftButton",
+                    "type": "Button",
+                    "id": "eda6fd28-6583-4693-8652-fa0b3af26711",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f97c4a81-0198-4607-af88-81fad193603b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClickLeftButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
