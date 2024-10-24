@@ -1,6 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using Game;
+﻿using Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,16 +26,36 @@ namespace Inputs
             _inputScheme = new InputScheme();
             _inputScheme.Enable();
             
-            _inputScheme.Map.ClickLeftButton.started += OnClick;
+            _inputScheme.Map.ClickLeftButton.performed += OnClickLeftButton;
+            _inputScheme.Map.ClickLeftButton.canceled += OnReleaseLeftButton;
         }
 
-        private void OnClick(InputAction.CallbackContext context)
+        private void OnReleaseLeftButton(InputAction.CallbackContext obj)
+        {
+            if (GameManager.Instance.IsHoldingSeed == false)
+            {
+                return;
+            }
+
+            HasBlockOnMouse(out BlockController block);
+            GameManager.Instance.DropSeedOnBlock(block);
+        }
+
+        private void OnClickLeftButton(InputAction.CallbackContext obj)
+        {
+            
+        }
+
+        public bool HasBlockOnMouse(out BlockController block)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.TryGetComponent(out BlockController block))
+            if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.TryGetComponent(out block))
             {
-                GameObject blockObject = block.gameObject;
+                return true;
             }
+
+            block = null;
+            return false;
         }
     }
 }

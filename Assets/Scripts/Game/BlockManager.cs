@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,15 @@ namespace Game
     {
         public List<BlockController> Blocks { get; private set; }
 
+        private void Awake()
+        {
+            Blocks ??= new List<BlockController>();
+            foreach (Transform child in transform)
+            {
+                Blocks.Add(child.GetComponent<BlockController>());
+            }
+        }
+
         public void AddBlock(BlockController block)
         {
             Blocks ??= new List<BlockController>();
@@ -15,14 +25,13 @@ namespace Game
 
         public void ClearBlocks()
         {
-            if (Blocks == null) return;
-            
-            foreach (BlockController block in Blocks)
+            int childCount = transform.childCount;
+            for (int i = 0; i < childCount; i++)
             {
-                if (block == null) continue;
-                DestroyImmediate(block.gameObject);
+                DestroyImmediate(transform.GetChild(0).gameObject);
             }
-            Blocks.Clear();
+            
+            Blocks?.Clear();
         }
     }
 }

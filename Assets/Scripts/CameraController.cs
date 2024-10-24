@@ -57,7 +57,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (EventSystem.current == null || EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current == null)
         {
             return;
         }
@@ -122,7 +122,7 @@ public class CameraController : MonoBehaviour
         {
             edgeVector.y = -1;
         }
-        else if (Input.mousePosition.y <= _firstBorderThickness)
+        else if (Input.mousePosition.y <= 0)//_firstBorderThickness)
         {
             edgeVector.y = 1;
         }
