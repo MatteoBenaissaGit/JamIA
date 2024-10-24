@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8510120381731654603
+--- !u!114 &-2986558648345189968
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,12 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: Dirt_3
   m_Shader: {fileID: -6465566751694194690, guid: 772468e273b372740ae172bab4fd9495, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _FORCE_VALUE_METALIC
+  - _FORCE_VALUE_ROUGHNESS
   - _SYSTEMTYPE_TRIPLANAR
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -39,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Base_Map:
-        m_Texture: {fileID: 2800000, guid: 3217c3365971c3e45bed09a061b301c1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6dc316139475bb04e887760522945098, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -108,24 +109,24 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FORCE_VALUE_METALIC: 1
-    - _FORCE_VALUE_ROUGHNESS: 0
+    - _FORCE_VALUE_ROUGHNESS: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Map_Tiling: 1
     - _Metallic: 0
     - _Mode: 0
-    - _Normal_Strenght: 0
+    - _Normal_Strenght: 0.49
     - _OcclusionStrength: 1
     - _Oclussion: 0.5
     - _Parallax: 0.02
-    - _Roughness: 0.5
+    - _Roughness: 0.948
     - _Roughthness_Intensity: 1
     - _SYSTEMTYPE: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TriplanarTiling: 0.25
+    - _TriplanarTiling: 0.42
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
