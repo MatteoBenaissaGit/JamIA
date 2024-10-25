@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isIrrigatedAtStart: 0
-  _baseMaterial: {fileID: 2100000, guid: cb2800e8c17fedc46927687d8de70b92, type: 2}
-  _irrigatedMaterial: {fileID: 2100000, guid: 304892820cf3359408ad5c08b2608d0d, type: 2}
+  _baseMaterial: {fileID: 2100000, guid: d9baa3a003aae8042824ad60106882ac, type: 2}
+  _irrigatedMaterial: {fileID: 2100000, guid: b6375dc750ef4c343bf358fddcdf3939, type: 2}
   _waterMaterial: {fileID: 0}
   _renderer: {fileID: 2033612506418565140}
   _seedPlantVFX: {fileID: 6047795482390550089}

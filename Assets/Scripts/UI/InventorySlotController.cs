@@ -50,6 +50,12 @@ namespace UI
             _seedIcon.DOFade(Amount <= 0 ? 0.5f : 1f, 0.5f);
             
             _amountText.text = Amount.ToString();
+            
+            if (amountToAdd > 0)
+            {
+                transform.DOComplete();
+                transform.DOPunchScale(Vector3.one * 0.1f, 0.2f);
+            }
         }
         
         public void OnPointerEnter(PointerEventData eventData)

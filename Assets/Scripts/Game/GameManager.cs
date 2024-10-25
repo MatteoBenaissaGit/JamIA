@@ -16,6 +16,8 @@ namespace Game
         
         public bool IsHoldingSeed { get; private set; }
         public int Money { get; private set; }
+        public int Experience { get; private set; }
+        public int SeedUnlocked { get; private set; }
 
         private SeedType _currentSeedHeld;
         private InventorySlotController _currentSeedHeldSlot;
@@ -35,6 +37,7 @@ namespace Game
         private void Start()
         {
             UI.Initialize();
+            UnlockSeed(1);
         }
 
         private void Update()
@@ -91,6 +94,33 @@ namespace Game
         {
             Money += amountToAdd;
             UI.SetMoney(Money);
+        }
+
+        private void UnlockSeed(int amount = 0)
+        {
+            UI.InventoryBar.CreateInventorySlot((SeedType)SeedUnlocked, amount);
+            UI.Shop.UnlockSeed(SeedUnlocked);
+            SeedUnlocked++;
+        }
+
+        public void AddExperience(int amount)
+        {
+            Experience += amount;
+            SeedUnlockCheck();
+            UI.SetExperience(Experience);
+        }
+        
+        private void SeedUnlockCheck()
+        {
+            if (Seeds.Data.Count <= SeedUnlocked)
+            {
+                return;
+            }
+            
+            if (Seeds.Data[SeedUnlocked].ExperienceToUnlock <= Experience)
+            {
+                UnlockSeed();
+            }
         }
     }
 }

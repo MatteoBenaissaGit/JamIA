@@ -17,5 +17,10 @@ namespace UI
             _slots.Add(slot);
             slot.Initialize(seedType, amount);
         }
+
+        public void AddSeedToSlot(SeedType type, int amount)
+        {
+            _slots[(int)type].SetAmount(amount);
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace Game
     public class BlockController : MonoBehaviour
     {
         [SerializeField] private bool _isIrrigatedAtStart;
+        [SerializeField] private bool _isWaterAtStart;
         [Space]
         [SerializeField] private Material _baseMaterial;
         [SerializeField] private Material _irrigatedMaterial;
@@ -17,6 +18,7 @@ namespace Game
         public ParticleSystem SeedPlantVFX => _seedPlantVFX;
         
         public bool IsIrrigated { get; private set; }
+        public bool IsWater { get; private set; }
         public Seed Seed { get; private set; }
 
         private float _baseY;
@@ -24,12 +26,18 @@ namespace Game
         private void Awake()
         {
             SetIrrigated(_isIrrigatedAtStart);
+            
             _baseY = transform.position.y;
+
+            if (_isWaterAtStart)
+            {
+                SetWater();
+            }
         }
 
         public bool CanGetSeed()
         {
-            return IsIrrigated && Seed == null; //TODO also check if block is water / has engine on it
+            return IsIrrigated && Seed == null && IsWater == false; //TODO also check if block has engine on it
         }
         
         public void SetIrrigated(bool irrigated)
@@ -40,6 +48,7 @@ namespace Game
 
         public void SetWater()
         {
+            IsWater = true;
             _renderer.material = _waterMaterial;
         }
 
@@ -73,6 +82,11 @@ namespace Game
         private void OnDrawGizmos()
         {
             if (_isIrrigatedAtStart)
+            {
+                Gizmos.color = new Color(1f, 0.55f, 0.22f);
+                Gizmos.DrawSphere(transform.position + Vector3.up * 0.5f, 0.2f);
+            }
+            if (_isWaterAtStart)
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawSphere(transform.position + Vector3.up * 0.5f, 0.2f);
